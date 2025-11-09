@@ -1,0 +1,49 @@
+keys,en,zh,ru,es,pt,de,ja,fr,ko,pl
+NEWGAME,New Game,新游戏,Новая игра,Nuevo juego,Novo jogo,Neues Spiel,新しいゲーム,Nouveau jeu,새로운 게임,Nowa gra
+CONTINUE,Continue,继续,Продолжать,Continuar,Continuar,Weitermachen,続く,Continuer,계속하다,Kontynuować
+RESUME,Resume,简历,Резюме,Currículum,Currículo,Lebenslauf,履歴書,Curriculum vitae,이력서,Wznowienie
+OPTIONS,Options,选项,Параметры,Opciones,Opções,Optionen,オプション,Possibilités,옵션,Opcje
+QUIT,Quit,辞职,Покидать,Abandonar,Desistir,Aufhören,やめる,Quitter,그만두다,Zrezygnować
+LANGUAGE,Language,语言,Язык,Idioma,Linguagem,Sprache,言語,Langue,언어,Język
+KEY_BINDINGS,Key Bindings,按键绑定,Ключевые привязки,Atajos de teclado,Combinações de teclas,Tastenbelegungen,キーバインド,Raccourcis clavier,키 바인딩,Powiązania klawiszy
+DISPLAY_SETTINGS,Video Settings,视频设置,Настройки видео,Ajustes de vídeo,Definições de vídeo,Video-Einstellungen,ビデオ設定,Paramètres vidéo,비디오 설정,Ustawienia wideo
+AUDIO_SETTINGS,Audio Settings,音频设置,Настройки звука,Configuraciones de audio,Configurações de áudio,Audio Einstellungen,オーディオ設定,Les paramètres audio,오디오 설정,Ustawienia dźwięku
+GRAPHICS_SETTINGS,Graphics Settings,图形设置,Настройки графики,Configuración de gráficos,Configurações gráficas,Grafikeinstellungen,グラフィック設定,Paramètres graphiques,그래픽 설정,Ustawienia graficzne
+CONTROL_SETTINGS,Control Settings,控制设置,Настройки управления,Ajustes de control,Definições de controlo,Einstellungen kontrollieren,コントロール設定,Réglages de contrôle,제어 설정,Ustawienia sterowania
+KEYBOARD_SETTINGS,Keyboard Settings,键盘设置,Настройки клавиатуры,Configuración del teclado,Definições do teclado,Tastatur-Einstellungen,キーボード設定,Paramètres du clavier,키보드 설정,Ustawienia klawiatury
+CONTROLLER_SETTINGS,Controller Settings,控制器设置,Настройки контроллера,Ajustes del controlador,Definições do controlador,Controller-Einstellungen,コントローラー設定,Réglages du contrôleur,컨트롤러 설정,Ustawienia kontrolera
+GAME_SETTINGS,Game Settings,游戏设置,Настройки игры,Ajustes del juego,Definições do jogo,Spiel-Einstellungen,ゲーム設定,Paramètres du jeu,게임 설정,Ustawienia gry
+MASTER_VOLUME,Master Volume,主音量,Основная громкость,Volumen maestro,Volume principal,Master-Lautstärke,マスターボリューム,Volume principal,마스터 볼륨,Głośność główna
+SOUND_VOLUME,Sound Volume,音量,Громкость звука,Volumen del sonido,Volume do som,Lautstärke,音量,Volume sonore,사운드 볼륨,Głośność dźwięku
+MUSIC_VOLUME,Music Volume,音乐音量,Музыкальная громкость,Volumen de la música,Volume da música,Musik Lautstärke,音楽ボリューム,Volume de la musique,음악 볼륨,Głośność muzyki
+SUBTITLES,Subtitles,字幕,Субтитры,Subtítulos,Legendas,Untertitel,字幕,Sous-titres,자막,Napisy
+WINDOW_MODE,Window Mode,窗口模式,Оконный режим,Modo ventana,Modo de janela,Fenster-Modus,ウィンドウモード,Mode fenêtre,창 모드,Tryb okna
+FULLSCREEN,Fullscreen,全屏,Оконный режим,Modo ventana,Modo janela,Fenstermodus,ウィンドウモード,Mode fenêtre,창 모드,Tryb okienkowy
+WINDOWED,Window,窗户,Окно,Ventana,Janela,Fenster,窓,Fenêtre,창,Okno
+WINDOW_SIZE,Window Size,窗口尺寸,Размер окна,Tamaño de la ventana,Tamanho da janela,Fenstergröße,窓サイズ,Taille de la fenêtre,창 크기,Rozmiar okna
+MOUSE_SENSITIVITY,Mouse Sensitivity,鼠标灵敏度,Чувствительность мыши,Sensibilidad del ratón,Sensibilidade do rato,Maus-Empfindlichkeit,マウスの感度,Sensibilité de la souris,마우스 감도,Wrażliwość myszy
+LOOK_SENSITIVITY,Look Sensitivity,观察灵敏度,Чувствительность взгляда,Sensibilidad de la mirada,Sensibilidade do olhar,Aussehen Empfindlichkeit,ルック・センシティビティ,Sensibilité au regard,보기 감도,Wrażliwość na wygląd
+LOOK_CURVE,Look Curve,外观曲线,Кривая взгляда,Curva de la mirada,Curva do olhar,Aussehen Kurve,ルック・カーブ,Look Curve,보기 커브,Krzywa wyglądu
+VERTICAL_SYNC,Vertical Sync,垂直同步,Вертикальная синхронизация,Sincronización vertical,Sincronização vertical,Vertikale Synchronisation,垂直同期,Synchronisation verticale,수직 동기화,Synchronizacja pionowa
+FRAMERATE_LIMIT,Frame Rate Limit,帧速率限制,Ограничение частоты кадров,Límite de velocidad de fotogramas,Limite da taxa de quadros,Frame Rate Limit,フレームレート制限,Limite de la fréquence d'images,프레임 속도 제한,Limit liczby klatek na sekundę
+RENDER_SCALE,Render Scale,渲染比例,Масштаб рендеринга,Escala de renderizado,Escala de renderização,Skala rendern,レンダリングスケール,Échelle de rendu,렌더링 스케일,Skala renderowania
+PROMPT_FOR_INPUT,Press any key,按任意键,Нажмите любую клавишу,Pulsar cualquier tecla,Premir qualquer tecla,Drücken Sie eine beliebige Taste,任意のキーを押す,Appuyer sur n'importe quelle touche,아무 키나 누릅니다.,Naciśnij dowolny przycisk
+TO_CANCEL,to cancel,取消,отменить,cancelar,para cancelar,zu stornieren,キャンセルする,pour annuler,취소하려면,anulować
+MOVE_FORWARD,Move Forward,向前迈进,Двигайтесь вперед,Avanzar,Avançar,Vorwärts bewegen,前進,Aller de l'avant,앞으로 이동,Move Forward
+MOVE_BACKWARD,Move Backward,向后移动,Двигаться назад,Retroceder,Mover para trás,Rückwärts bewegen,後退,Déplacement vers l'arrière,뒤로 이동,Przesuń do tyłu
+MOVE_LEFT,Move Left,向左移动,Двигайтесь влево,Mover a la izquierda,Mover para a esquerda,Nach links bewegen,左へ移動,Déplacement vers la gauche,왼쪽으로 이동,Przesuń w lewo
+MOVE_RIGHT,Move Right,向右转,Двигайтесь правильно,Muévete a la derecha,Mover para a direita,Nach rechts bewegen,右へ動く,Aller de l'avant,오른쪽으로 이동,Przesuń w prawo
+FIRE,Fire,消防,Огонь,Fuego,Incêndio,Feuer,火災,Incendie,화재,Ogień
+ALT_FIRE,Alternate Fire,备用火,Альтернативный огонь,Fuego alternativo,Fogo alternativo,Alternatives Feuer,代替ファイヤー,Feu alternatif,대체 발사,Alternatywny ogień
+SPRINT,Sprint,冲刺,Sprint,Sprint,Sprint,Sprint,スプリント,Sprint,스프린트,Sprint
+CROUCH,Crouch,克劳奇,Крауч,Crouch,Crouch,Crouch,クラウチ,Crouch,크라우치,Crouch
+CROUCH_TOGGLE,Crouch Toggle,克劳奇触发器,Тумблер приседания,Crouch Toggle,Agachamento,Crouch Toggle,クラウチ・トグル,Accroupissement Bascule,웅크리기 토글,Crouch Toggle
+JUMP,Jump,跳转,Перейти,Saltar,Saltar,Springen,ジャンプ,Sauter,점프,Skok
+MOUSE_BUTTON_{index},Mouse Button {index},鼠标按钮 {index},Кнопка мыши {index},Botón del ratón {index},Botão do rato {index},Maustaste {index},マウスボタン {index},Bouton de la souris {index},마우스 버튼 {index},Przycisk myszy {index}
+FIELD_OF_VIEW,Field of View,视野,Поле зрения,Campo de visión,Campo de visão,Sichtfeld,視野,Champ de vision,시야각,Pole widzenia
+SET_BINDING,Set Binding,套装装订,Установить переплет,Fijar encuadernación,Definir encadernação,Satz Bindung,セットバインディング,Fixation de la reliure,바인딩 설정,Oprawa zestawu
+CLEAR_BINDING,Clear Binding,透明装订,Прозрачный переплет,Encuadernación transparente,Encadernação transparente,Klare Bindung,クリアバインディング,Reliure transparente,바인딩 지우기,Przezroczysta oprawa
+RESET_BINDING,Reset to Default,重置为默认值,Сброс настроек по умолчанию,Restablecer valores por defecto,Repor a predefinição,Auf Standard zurücksetzen,デフォルトにリセット,Rétablissement des valeurs par défaut,기본값으로 재설정,Przywróć ustawienia domyślne
+BORDERLESS,Borderless,无国界,Без границ,Sin fronteras,Sem fronteiras,Grenzenlos,ボーダレス,Sans frontières,경계 없는,Bez granic
+EXCLUSIVE_FULLSCREEN,Exclusive Fullscreen,独家全屏,Эксклюзив Полный экран,Pantalla completa exclusiva,Ecrã completo exclusivo,Exklusiver Vollbildschirm,独占フルスクリーン,Exclusif Plein écran,독점 전체 화면,Ekskluzywny pełny ekran
+ALLOW_COPYRIGHT_MUSIC,Allow Licensed Music,允许授权音乐,Разрешить лицензионную музыку,Permitir música con licencia,Permitir música licenciada,Lizensierte Musik zulassen,ライセンス音楽の許可,Autoriser la musique sous licence,라이선스 음악 허용,Zezwalaj na licencjonowaną muzykę

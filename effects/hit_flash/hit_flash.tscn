@@ -1,0 +1,106 @@
+[gd_scene load_steps=17 format=3 uid="uid://bg0kb3r3244tr"]
+
+[ext_resource type="Script" path="res://effects/pool_effect.gd" id="1_55ww4"]
+[ext_resource type="Material" uid="uid://63opxh4v6s16" path="res://effects/hit_flash/mat_flash.tres" id="2_f8s4b"]
+
+[sub_resource type="Curve" id="Curve_weype"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_min8p"]
+curve = SubResource("Curve_weype")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7mv33"]
+angle_min = 1.07288e-05
+angle_max = 180.0
+gravity = Vector3(0, 0, 0)
+scale_min = 1.3
+scale_max = 1.6
+scale_curve = SubResource("CurveTexture_min8p")
+color = Color(1.5, 1.25, 1, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_ox2sy"]
+material = ExtResource("2_f8s4b")
+
+[sub_resource type="Gradient" id="Gradient_f8s4b"]
+offsets = PackedFloat32Array(0, 0.479744, 0.675906, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_wvpo1"]
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_trpuc"]
+in_3d_space = true
+seamless = true
+color_ramp = SubResource("Gradient_f8s4b")
+noise = SubResource("FastNoiseLite_wvpo1")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_itsv6"]
+transparency = 4
+shading_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = SubResource("NoiseTexture2D_trpuc")
+uv1_triplanar = true
+uv1_world_triplanar = true
+billboard_keep_scale = true
+
+[sub_resource type="Gradient" id="Gradient_itsv6"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_sj8pl"]
+gradient = SubResource("Gradient_itsv6")
+
+[sub_resource type="Curve" id="Curve_oagkr"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_o38o2"]
+curve = SubResource("Curve_oagkr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3c5ok"]
+lifetime_randomness = 0.25
+direction = Vector3(0, 0, -1)
+spread = 10.0
+initial_velocity_min = 0.15
+initial_velocity_max = 0.75
+angular_velocity_min = -1.60933e-05
+angular_velocity_max = 9.99998
+orbit_velocity_min = 9.49949e-08
+orbit_velocity_max = 9.49949e-08
+gravity = Vector3(0, 0, 0)
+scale_min = 0.4
+scale_max = 0.8
+scale_curve = SubResource("CurveTexture_o38o2")
+color_ramp = SubResource("GradientTexture1D_sj8pl")
+
+[sub_resource type="SphereMesh" id="SphereMesh_f8s4b"]
+
+[node name="HitFlash" type="Node3D"]
+script = ExtResource("1_55ww4")
+effect_id = "hit_flash"
+max_instances = 20
+set_lifetime = 3.0
+
+[node name="MuzzleFlash" type="GPUParticles3D" parent="."]
+cast_shadow = 0
+gi_mode = 0
+emitting = false
+amount = 1
+lifetime = 0.2
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_7mv33")
+draw_pass_1 = SubResource("QuadMesh_ox2sy")
+
+[node name="Smonk" type="GPUParticles3D" parent="."]
+material_override = SubResource("StandardMaterial3D_itsv6")
+emitting = false
+amount = 3
+lifetime = 2.0
+one_shot = true
+preprocess = 0.5
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_3c5ok")
+draw_pass_1 = SubResource("SphereMesh_f8s4b")

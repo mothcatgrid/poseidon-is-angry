@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="AchievementResource" load_steps=3 format=3 uid="uid://cs6wd3a2mqla4"]
+
+[ext_resource type="Texture2D" uid="uid://1uojxvmkq6f" path="res://icon.svg" id="1_arywp"]
+[ext_resource type="Script" path="res://autoload/achievements/achievement_resource.gd" id="1_rbxik"]
+
+[resource]
+script = ExtResource("1_rbxik")
+id = "win_100"
+stat = 0
+goal_value = 100
+stat_location = 0
+steam_api_name = "ACH_WIN_100_GAMES"
+notify = true
+title = "Big Winner"
+description = "Win 100 games."
+achieved_icon = ExtResource("1_arywp")
+metadata/_custom_type_script = ExtResource("1_rbxik")

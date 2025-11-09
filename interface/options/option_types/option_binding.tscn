@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlkpuo5jr7f1x"]
+
+[ext_resource type="Script" uid="uid://vv4fbqhg7wk4" path="res://interface/options/option_types/option_binding.gd" id="1_4dkjv"]
+[ext_resource type="Script" uid="uid://cdpfteetdqb8w" path="res://interface/components/input_prompt.gd" id="2_g56yo"]
+
+[node name="OptionKeyboardBinding" type="Button"]
+custom_minimum_size = Vector2(0, 48)
+offset_right = 320.0
+offset_bottom = 64.0
+script = ExtResource("1_4dkjv")
+option_identifier = "bindings"
+option_type = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HBox" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="MarginContainer/HBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Some Option"
+vertical_alignment = 1
+
+[node name="InputPrompt" type="TextureRect" parent="MarginContainer/HBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(56, 56)
+layout_mode = 2
+expand_mode = 2
+stretch_mode = 5
+script = ExtResource("2_g56yo")

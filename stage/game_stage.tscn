@@ -1,0 +1,99 @@
+[gd_scene load_steps=15 format=3 uid="uid://exrgufcpebjo"]
+
+[ext_resource type="Script" uid="uid://bpm7b4ppb88a5" path="res://stage/game_stage.gd" id="1_ngn01"]
+[ext_resource type="PackedScene" uid="uid://2ya8kahujt6x" path="res://interface/hud/hud.tscn" id="2_w873j"]
+
+[sub_resource type="Gradient" id="Gradient_ngn01"]
+colors = PackedColorArray(0.3413363, 0.7551287, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_w873j"]
+noise_type = 2
+cellular_distance_function = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vqmhq"]
+width = 1024
+height = 1024
+noise = SubResource("FastNoiseLite_w873j")
+color_ramp = SubResource("Gradient_ngn01")
+seamless = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_75ptj"]
+albedo_texture = SubResource("NoiseTexture2D_vqmhq")
+albedo_texture_force_srgb = true
+uv1_scale = Vector3(0.01, 0.01, 0.01)
+uv1_triplanar = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_mtk5m"]
+size = Vector2(1000, 1000)
+subdivide_width = 100
+subdivide_depth = 100
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1imul"]
+albedo_color = Color(0.17981565, 0.40625, 0.18449236, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_v7cli"]
+radius = 64.0
+height = 12.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_s31gr"]
+radius = 32.0
+height = 12.0
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_jr68l"]
+radius = 0.3
+height = 1.8
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hwnsv"]
+sky_top_color = Color(0.54145217, 0.8236853, 1, 1)
+sky_horizon_color = Color(1, 0.7639747, 0.6183852, 1)
+sky_curve = 0.14489044
+ground_bottom_color = Color(0.21672451, 0.2673611, 0.2734375, 1)
+ground_horizon_color = Color(1, 0.7647059, 0.61960787, 1)
+ground_curve = 0.09513663
+sun_angle_max = 57.05
+sun_curve = 0.07764561
+
+[sub_resource type="Sky" id="Sky_cwrbe"]
+sky_material = SubResource("ProceduralSkyMaterial_hwnsv")
+radiance_size = 2
+
+[sub_resource type="Environment" id="Environment_xmjbq"]
+background_mode = 2
+sky = SubResource("Sky_cwrbe")
+
+[node name="GameStage" type="Node3D"]
+script = ExtResource("1_ngn01")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.9941227, -0.10825966, 0, 0.10825966, 0.9941227, 3.8146973e-06, 9.462279, 67.93049)
+fov = 50.0
+
+[node name="Water" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.9986295, -0.05233596, 0, 0.05233596, 0.9986295, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_75ptj")
+mesh = SubResource("PlaneMesh_mtk5m")
+
+[node name="Land" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -68.09984, 0, 0)
+material_override = SubResource("StandardMaterial3D_1imul")
+mesh = SubResource("SphereMesh_v7cli")
+
+[node name="Land2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -68.09984, 4.5620327, 6.610365)
+material_override = SubResource("StandardMaterial3D_1imul")
+mesh = SubResource("SphereMesh_s31gr")
+
+[node name="Poseidon" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48.475, 20, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Poseidon"]
+mesh = SubResource("CapsuleMesh_jr68l")
+skeleton = NodePath("../..")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_xmjbq")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(-0.9732511, -0.020594675, 0.22881901, -7.836732e-09, 0.99597406, 0.08964183, -0.22974388, 0.08724401, -0.9693329, 0, 42, -107)
+
+[node name="HUD" parent="." instance=ExtResource("2_w873j")]

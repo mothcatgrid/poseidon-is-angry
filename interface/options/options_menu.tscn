@@ -1,0 +1,564 @@
+[gd_scene load_steps=14 format=3 uid="uid://cp3vdpmngisqc"]
+
+[ext_resource type="Script" path="res://interface/options/options_menu.gd" id="1_1yv2t"]
+[ext_resource type="Theme" uid="uid://clyjuwxwpddet" path="res://interface/ui_main_theme.tres" id="1_cse7t"]
+[ext_resource type="Script" uid="uid://dhcgc48818kdd" path="res://interface/options/option_types/resolution_choice.gd" id="4_rr5qv"]
+[ext_resource type="Script" path="res://interface/components/modal_component.gd" id="4_sa4ap"]
+[ext_resource type="PackedScene" uid="uid://8puuemrm0vn2" path="res://interface/options/option_types/option_choice.tscn" id="5_rs4a1"]
+[ext_resource type="PackedScene" uid="uid://dpaaonoqc38fp" path="res://interface/options/option_types/option_toggle.tscn" id="6_of8nj"]
+[ext_resource type="PackedScene" uid="uid://rkkbh0g4lt78" path="res://interface/options/option_types/option_slider.tscn" id="7_s3hnv"]
+[ext_resource type="PackedScene" uid="uid://dlkpuo5jr7f1x" path="res://interface/options/option_types/option_binding.tscn" id="8_a361i"]
+[ext_resource type="Script" uid="uid://cdpfteetdqb8w" path="res://interface/components/input_prompt.gd" id="10_j0i1s"]
+[ext_resource type="Script" uid="uid://c82xmlm1xmh4q" path="res://interface/options/rebind_overlay.gd" id="10_prvbs"]
+[ext_resource type="Script" path="res://interface/components/link_visibility.gd" id="11_d2gwq"]
+[ext_resource type="Texture2D" uid="uid://dq1pky5kdhgeg" path="res://interface/textures/input_prompts/keyboard/kb_u.png" id="11_sdie8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u4dmj"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="OptionsMenu" type="CenterContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_cse7t")
+script = ExtResource("1_1yv2t")
+
+[node name="OptionsRoot" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 2
+mouse_filter = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="OptionsRoot"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="OptionsRoot/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="PauseLabel" type="Label" parent="OptionsRoot/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "OPTIONS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameplayButton" type="Button" parent="OptionsRoot/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 4
+text = "GAME_SETTINGS"
+
+[node name="DisplayButton" type="Button" parent="OptionsRoot/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 4
+text = "DISPLAY_SETTINGS"
+
+[node name="AudioButton" type="Button" parent="OptionsRoot/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 4
+text = "AUDIO_SETTINGS"
+
+[node name="KeyboardButton" type="Button" parent="OptionsRoot/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 4
+text = "KEYBOARD_SETTINGS"
+
+[node name="ControllerButton" type="Button" parent="OptionsRoot/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 4
+text = "CONTROLLER_SETTINGS"
+
+[node name="GameRoot" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 2
+mouse_filter = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="GameRoot"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameRoot/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="GameRoot/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "GAME_SETTINGS"
+horizontal_alignment = 1
+
+[node name="FovSlider" parent="GameRoot/MarginContainer/VBoxContainer" instance=ExtResource("7_s3hnv")]
+custom_minimum_size = Vector2(420, 48)
+layout_mode = 2
+value_min = 60.0
+value_max = 110.0
+option_text = "FIELD_OF_VIEW"
+option_identifier = "fov"
+option_type = 1
+
+[node name="CrouchToggle" parent="GameRoot/MarginContainer/VBoxContainer" instance=ExtResource("6_of8nj")]
+layout_mode = 2
+option_text = "CROUCH_TOGGLE"
+option_identifier = "crouch_toggle"
+option_type = 1
+
+[node name="ModalComponent" type="Control" parent="GameRoot" node_paths=PackedStringArray("activator_root", "activator", "modal", "modal_initial_focus")]
+layout_mode = 2
+script = ExtResource("4_sa4ap")
+activator_root = NodePath("../../OptionsRoot")
+activator = NodePath("../../OptionsRoot/MarginContainer/VBoxContainer/GameplayButton")
+modal = NodePath("..")
+modal_initial_focus = NodePath("../MarginContainer/VBoxContainer/FovSlider")
+
+[node name="DisplayRoot" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 2
+mouse_filter = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="DisplayRoot"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DisplayRoot/MarginContainer"]
+custom_minimum_size = Vector2(480, 0)
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="DisplayRoot/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "DISPLAY_SETTINGS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ResolutionChoice" parent="DisplayRoot/MarginContainer/VBoxContainer" instance=ExtResource("5_rs4a1")]
+layout_mode = 2
+script = ExtResource("4_rr5qv")
+get_choices_method = "get_resolution_choices"
+option_text = "WINDOW_SIZE"
+option_identifier = "resolution"
+
+[node name="FullscreenToggle" parent="DisplayRoot/MarginContainer/VBoxContainer" instance=ExtResource("6_of8nj")]
+layout_mode = 2
+option_text = "FULLSCREEN"
+option_identifier = "fullscreen"
+
+[node name="VsyncChoice" parent="DisplayRoot/MarginContainer/VBoxContainer" instance=ExtResource("6_of8nj")]
+layout_mode = 2
+option_text = "VERTICAL_SYNC"
+option_identifier = "vsync"
+
+[node name="FramerateSlider" parent="DisplayRoot/MarginContainer/VBoxContainer" instance=ExtResource("7_s3hnv")]
+layout_mode = 2
+value_max = 320.0
+value_step = 10.0
+option_text = "FRAMERATE_LIMIT"
+option_identifier = "frame_limit"
+
+[node name="RenderScaleSlider" parent="DisplayRoot/MarginContainer/VBoxContainer" instance=ExtResource("7_s3hnv")]
+layout_mode = 2
+value_min = 30.0
+value_step = 5.0
+option_text = "RENDER_SCALE"
+option_identifier = "render_scale"
+
+[node name="ModalComponent" type="Control" parent="DisplayRoot" node_paths=PackedStringArray("activator_root", "activator", "modal", "modal_initial_focus")]
+layout_mode = 2
+script = ExtResource("4_sa4ap")
+activator_root = NodePath("../../OptionsRoot")
+activator = NodePath("../../OptionsRoot/MarginContainer/VBoxContainer/DisplayButton")
+modal = NodePath("..")
+modal_initial_focus = NodePath("../MarginContainer/VBoxContainer/FullscreenToggle")
+
+[node name="AudioRoot" type="PanelContainer" parent="."]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="AudioRoot"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AudioRoot/MarginContainer"]
+custom_minimum_size = Vector2(480, 0)
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="AudioRoot/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "AUDIO_SETTINGS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MasterVolSlider" parent="AudioRoot/MarginContainer/VBoxContainer" instance=ExtResource("7_s3hnv")]
+custom_minimum_size = Vector2(500, 48)
+layout_mode = 2
+value_step = 5.0
+option_text = "MASTER_VOLUME"
+
+[node name="SoundVolSlider" parent="AudioRoot/MarginContainer/VBoxContainer" instance=ExtResource("7_s3hnv")]
+custom_minimum_size = Vector2(500, 48)
+layout_mode = 2
+value_step = 5.0
+option_text = "SOUND_VOLUME"
+option_identifier = "sound_volume"
+
+[node name="MusicVolSlider" parent="AudioRoot/MarginContainer/VBoxContainer" instance=ExtResource("7_s3hnv")]
+custom_minimum_size = Vector2(500, 48)
+layout_mode = 2
+value_step = 5.0
+option_text = "MUSIC_VOLUME"
+option_identifier = "music_volume"
+
+[node name="SubtitlesToggle" parent="AudioRoot/MarginContainer/VBoxContainer" instance=ExtResource("6_of8nj")]
+layout_mode = 2
+option_text = "SUBTITLES"
+option_identifier = "subtitles"
+
+[node name="CopyrightToggle" parent="AudioRoot/MarginContainer/VBoxContainer" instance=ExtResource("6_of8nj")]
+layout_mode = 2
+option_text = "ALLOW_COPYRIGHT_MUSIC"
+option_identifier = "allow_copyright_music"
+option_type = 1
+
+[node name="ModalComponent" type="Control" parent="AudioRoot" node_paths=PackedStringArray("activator_root", "activator", "modal", "modal_initial_focus")]
+layout_mode = 2
+script = ExtResource("4_sa4ap")
+activator_root = NodePath("../../OptionsRoot")
+activator = NodePath("../../OptionsRoot/MarginContainer/VBoxContainer/AudioButton")
+modal = NodePath("..")
+modal_initial_focus = NodePath("../MarginContainer/VBoxContainer/MasterVolSlider")
+
+[node name="KeyboardControlsRoot" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="KeyboardControlsRoot"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="KeyboardControlsRoot/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="KeyboardControlsRoot/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "KEYBOARD_SETTINGS"
+horizontal_alignment = 1
+
+[node name="OptionSlider" parent="KeyboardControlsRoot/MarginContainer/VBoxContainer" instance=ExtResource("7_s3hnv")]
+custom_minimum_size = Vector2(500, 48)
+layout_mode = 2
+option_text = "MOUSE_SENSITIVITY"
+option_identifier = "mouse_sensitivity"
+option_type = 1
+
+[node name="Label2" type="Label" parent="KeyboardControlsRoot/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "BINDINGS"
+horizontal_alignment = 1
+
+[node name="OptionKeyboardBinding" parent="KeyboardControlsRoot/MarginContainer/VBoxContainer" instance=ExtResource("8_a361i")]
+layout_mode = 2
+action = "move_up"
+option_text = "MOVE_FORWARD"
+
+[node name="OptionKeyboardBinding2" parent="KeyboardControlsRoot/MarginContainer/VBoxContainer" instance=ExtResource("8_a361i")]
+layout_mode = 2
+action = "move_down"
+option_text = "MOVE_BACKWARD"
+
+[node name="OptionKeyboardBinding3" parent="KeyboardControlsRoot/MarginContainer/VBoxContainer" instance=ExtResource("8_a361i")]
+layout_mode = 2
+action = "move_left"
+option_text = "MOVE_LEFT"
+
+[node name="OptionKeyboardBinding4" parent="KeyboardControlsRoot/MarginContainer/VBoxContainer" instance=ExtResource("8_a361i")]
+layout_mode = 2
+action = "move_right"
+option_text = "MOVE_RIGHT"
+
+[node name="OptionKeyboardBinding5" parent="KeyboardControlsRoot/MarginContainer/VBoxContainer" instance=ExtResource("8_a361i")]
+layout_mode = 2
+action = "fire1"
+option_text = "FIRE"
+
+[node name="OptionKeyboardBinding6" parent="KeyboardControlsRoot/MarginContainer/VBoxContainer" instance=ExtResource("8_a361i")]
+layout_mode = 2
+action = "fire2"
+option_text = "ALT_FIRE"
+
+[node name="OptionKeyboardBinding7" parent="KeyboardControlsRoot/MarginContainer/VBoxContainer" instance=ExtResource("8_a361i")]
+layout_mode = 2
+action = "sprint"
+option_text = "SPRINT"
+
+[node name="OptionKeyboardBinding8" parent="KeyboardControlsRoot/MarginContainer/VBoxContainer" instance=ExtResource("8_a361i")]
+layout_mode = 2
+action = "jump"
+option_text = "JUMP"
+
+[node name="OptionKeyboardBinding9" parent="KeyboardControlsRoot/MarginContainer/VBoxContainer" instance=ExtResource("8_a361i")]
+layout_mode = 2
+action = "crouch"
+option_text = "CROUCH"
+
+[node name="ModalComponent" type="Control" parent="KeyboardControlsRoot" node_paths=PackedStringArray("activator_root", "activator", "modal", "modal_initial_focus")]
+layout_mode = 2
+script = ExtResource("4_sa4ap")
+activator_root = NodePath("../../OptionsRoot")
+activator = NodePath("../../OptionsRoot/MarginContainer/VBoxContainer/KeyboardButton")
+modal = NodePath("..")
+modal_initial_focus = NodePath("../MarginContainer/VBoxContainer/OptionSlider")
+
+[node name="ControllerControlsRoot" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 2
+mouse_filter = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="ControllerControlsRoot"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ControllerControlsRoot/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="ControllerControlsRoot/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "CONTROLLER_SETTINGS"
+horizontal_alignment = 1
+
+[node name="LookSensSlider" parent="ControllerControlsRoot/MarginContainer/VBoxContainer" instance=ExtResource("7_s3hnv")]
+custom_minimum_size = Vector2(500, 48)
+layout_mode = 2
+value_min = 1.0
+value_max = 10.0
+option_text = "LOOK_SENSITIVITY"
+option_identifier = "look_sensitivity"
+option_type = 1
+
+[node name="Label2" type="Label" parent="ControllerControlsRoot/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "BINDINGS"
+horizontal_alignment = 1
+
+[node name="OptionKeyboardBinding" parent="ControllerControlsRoot/MarginContainer/VBoxContainer" instance=ExtResource("8_a361i")]
+layout_mode = 2
+action = "sprint"
+bind_type = 1
+option_text = "SPRINT"
+
+[node name="OptionKeyboardBinding2" parent="ControllerControlsRoot/MarginContainer/VBoxContainer" instance=ExtResource("8_a361i")]
+layout_mode = 2
+action = "jump"
+bind_type = 1
+option_text = "JUMP"
+
+[node name="OptionKeyboardBinding3" parent="ControllerControlsRoot/MarginContainer/VBoxContainer" instance=ExtResource("8_a361i")]
+layout_mode = 2
+action = "fire1"
+bind_type = 1
+option_text = "FIRE"
+
+[node name="ModalComponent" type="Control" parent="ControllerControlsRoot" node_paths=PackedStringArray("activator_root", "activator", "modal", "modal_initial_focus")]
+layout_mode = 2
+script = ExtResource("4_sa4ap")
+activator_root = NodePath("../../OptionsRoot")
+activator = NodePath("../../OptionsRoot/MarginContainer/VBoxContainer/ControllerButton")
+modal = NodePath("..")
+modal_initial_focus = NodePath("../MarginContainer/VBoxContainer/LookSensSlider")
+
+[node name="RebindOverlay" type="Control" parent="."]
+visible = false
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 2
+script = ExtResource("10_prvbs")
+
+[node name="ColorRect" type="ColorRect" parent="RebindOverlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.501961)
+
+[node name="PanelContainer" type="PanelContainer" parent="RebindOverlay/ColorRect"]
+custom_minimum_size = Vector2(420, 128)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_u4dmj")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="RebindOverlay/ColorRect/PanelContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="RebindOverlay/ColorRect/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "PROMPT_FOR_INPUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RebindOverlay/ColorRect/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="InputPrompt" type="TextureRect" parent="RebindOverlay/ColorRect/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+texture = ExtResource("11_sdie8")
+expand_mode = 3
+stretch_mode = 5
+script = ExtResource("10_j0i1s")
+action = "binding_cancel"
+
+[node name="Label2" type="Label" parent="RebindOverlay/ColorRect/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "TO_CANCEL"
+vertical_alignment = 1
+
+[node name="BindingHelpPanel" type="Control" parent="."]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="BindingHelpPanel"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -64.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="BindingHelpPanel/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BindingHelpPanel/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="SelectHBox" type="HBoxContainer" parent="BindingHelpPanel/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="InputPrompt" type="TextureRect" parent="BindingHelpPanel/PanelContainer/MarginContainer/HBoxContainer/SelectHBox"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+expand_mode = 3
+stretch_mode = 5
+script = ExtResource("10_j0i1s")
+action = "ui_enter"
+
+[node name="Label" type="Label" parent="BindingHelpPanel/PanelContainer/MarginContainer/HBoxContainer/SelectHBox"]
+layout_mode = 2
+text = "SET_BINDING"
+
+[node name="ClearHBox" type="HBoxContainer" parent="BindingHelpPanel/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="InputPrompt" type="TextureRect" parent="BindingHelpPanel/PanelContainer/MarginContainer/HBoxContainer/ClearHBox"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+expand_mode = 3
+stretch_mode = 5
+script = ExtResource("10_j0i1s")
+action = "ui_clear"
+
+[node name="Label" type="Label" parent="BindingHelpPanel/PanelContainer/MarginContainer/HBoxContainer/ClearHBox"]
+layout_mode = 2
+text = "CLEAR_BINDING"
+
+[node name="SelectHBox3" type="HBoxContainer" parent="BindingHelpPanel/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="InputPrompt" type="TextureRect" parent="BindingHelpPanel/PanelContainer/MarginContainer/HBoxContainer/SelectHBox3"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+expand_mode = 3
+stretch_mode = 5
+script = ExtResource("10_j0i1s")
+action = "ui_reset"
+
+[node name="Label" type="Label" parent="BindingHelpPanel/PanelContainer/MarginContainer/HBoxContainer/SelectHBox3"]
+layout_mode = 2
+text = "RESET_BINDING"
+
+[node name="LinkVisibility" type="Control" parent="BindingHelpPanel" node_paths=PackedStringArray("source", "target")]
+layout_mode = 2
+anchors_preset = 0
+offset_left = 960.0
+offset_top = 540.0
+offset_right = 960.0
+offset_bottom = 540.0
+script = ExtResource("11_d2gwq")
+source = NodePath("../../KeyboardControlsRoot")
+target = NodePath("..")
+
+[node name="LinkVisibility2" type="Control" parent="BindingHelpPanel" node_paths=PackedStringArray("source", "target")]
+layout_mode = 2
+anchors_preset = 0
+offset_left = 960.0
+offset_top = 540.0
+offset_right = 960.0
+offset_bottom = 540.0
+script = ExtResource("11_d2gwq")
+source = NodePath("../../ControllerControlsRoot")
+target = NodePath("..")

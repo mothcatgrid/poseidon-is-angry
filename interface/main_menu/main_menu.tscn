@@ -1,0 +1,172 @@
+[gd_scene load_steps=5 format=3 uid="uid://dsm81pkyphkxb"]
+
+[ext_resource type="Theme" uid="uid://clyjuwxwpddet" path="res://interface/ui_main_theme.tres" id="1_crvgp"]
+[ext_resource type="Script" path="res://interface/main_menu/main_menu.gd" id="1_n6ws8"]
+[ext_resource type="PackedScene" uid="uid://cp3vdpmngisqc" path="res://interface/options/options_menu.tscn" id="3_ng2ks"]
+[ext_resource type="Script" path="res://interface/components/modal_component.gd" id="4_fbrwa"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_crvgp")
+script = ExtResource("1_n6ws8")
+
+[node name="MainMenuVBox" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.5
+offset_top = -68.0
+offset_right = 45.5
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NewGame" type="Button" parent="MainMenuVBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+size_flags_vertical = 3
+text = "NEWGAME"
+
+[node name="Continue" type="Button" parent="MainMenuVBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+size_flags_vertical = 3
+text = "CONTINUE"
+
+[node name="Options" type="Button" parent="MainMenuVBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+size_flags_vertical = 3
+text = "OPTIONS"
+
+[node name="LanguageButton" type="Button" parent="MainMenuVBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+text = "LANGUAGE"
+
+[node name="Quit" type="Button" parent="MainMenuVBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+size_flags_vertical = 3
+text = "QUIT"
+
+[node name="LanguagePanel" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 902.0
+offset_top = 216.0
+offset_right = 1069.0
+offset_bottom = 890.0
+
+[node name="LanguageButtonList" type="VBoxContainer" parent="LanguagePanel"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="en" type="Button" parent="LanguagePanel/LanguageButtonList"]
+layout_mode = 2
+auto_translate = false
+theme_override_font_sizes/font_size = 32
+toggle_mode = true
+text = "English"
+
+[node name="zh" type="Button" parent="LanguagePanel/LanguageButtonList"]
+layout_mode = 2
+auto_translate = false
+theme_override_font_sizes/font_size = 32
+toggle_mode = true
+text = "中国人"
+
+[node name="ru" type="Button" parent="LanguagePanel/LanguageButtonList"]
+layout_mode = 2
+auto_translate = false
+theme_override_font_sizes/font_size = 32
+toggle_mode = true
+text = "Русский"
+
+[node name="es" type="Button" parent="LanguagePanel/LanguageButtonList"]
+layout_mode = 2
+auto_translate = false
+theme_override_font_sizes/font_size = 32
+toggle_mode = true
+text = "Español"
+
+[node name="pt" type="Button" parent="LanguagePanel/LanguageButtonList"]
+layout_mode = 2
+auto_translate = false
+theme_override_font_sizes/font_size = 32
+toggle_mode = true
+text = "Português"
+
+[node name="de" type="Button" parent="LanguagePanel/LanguageButtonList"]
+layout_mode = 2
+auto_translate = false
+theme_override_font_sizes/font_size = 32
+toggle_mode = true
+text = "Deutsch"
+
+[node name="ja" type="Button" parent="LanguagePanel/LanguageButtonList"]
+layout_mode = 2
+auto_translate = false
+theme_override_font_sizes/font_size = 32
+toggle_mode = true
+text = "日本語"
+
+[node name="fr" type="Button" parent="LanguagePanel/LanguageButtonList"]
+layout_mode = 2
+auto_translate = false
+theme_override_font_sizes/font_size = 32
+toggle_mode = true
+text = "Français"
+
+[node name="ko" type="Button" parent="LanguagePanel/LanguageButtonList"]
+layout_mode = 2
+auto_translate = false
+theme_override_font_sizes/font_size = 32
+toggle_mode = true
+text = "한국인"
+
+[node name="pl" type="Button" parent="LanguagePanel/LanguageButtonList"]
+layout_mode = 2
+auto_translate = false
+theme_override_font_sizes/font_size = 32
+toggle_mode = true
+text = "Polski"
+
+[node name="OptionsMenu" parent="." instance=ExtResource("3_ng2ks")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="MainMenuOptionLink" type="Control" parent="." node_paths=PackedStringArray("activator_root", "activator", "modal", "modal_initial_focus")]
+anchors_preset = 0
+script = ExtResource("4_fbrwa")
+activator_root = NodePath("../MainMenuVBox")
+activator = NodePath("../MainMenuVBox/Options")
+modal = NodePath("../OptionsMenu/OptionsRoot")
+modal_initial_focus = NodePath("../OptionsMenu/OptionsRoot/MarginContainer/VBoxContainer/GameplayButton")
+
+[node name="MainMenuLanguageLink" type="Control" parent="." node_paths=PackedStringArray("activator_root", "activator", "modal", "modal_initial_focus")]
+anchors_preset = 0
+script = ExtResource("4_fbrwa")
+activator_root = NodePath("../MainMenuVBox")
+activator = NodePath("../MainMenuVBox/LanguageButton")
+modal = NodePath("../LanguagePanel")
+modal_initial_focus = NodePath("../LanguagePanel/LanguageButtonList/en")
+
+[editable path="OptionsMenu"]

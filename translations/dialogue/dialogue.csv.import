@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://cy3gsu1jy1cr0"
+
+[deps]
+
+files=["res://translations/dialogue/dialogue.en.translation", "res://translations/dialogue/dialogue.zh.translation", "res://translations/dialogue/dialogue.ru.translation", "res://translations/dialogue/dialogue.es.translation", "res://translations/dialogue/dialogue.pt.translation", "res://translations/dialogue/dialogue.de.translation", "res://translations/dialogue/dialogue.ja.translation", "res://translations/dialogue/dialogue.fr.translation", "res://translations/dialogue/dialogue.ko.translation", "res://translations/dialogue/dialogue.pl.translation"]
+
+source_file="res://translations/dialogue/dialogue.csv"
+dest_files=["res://translations/dialogue/dialogue.en.translation", "res://translations/dialogue/dialogue.zh.translation", "res://translations/dialogue/dialogue.ru.translation", "res://translations/dialogue/dialogue.es.translation", "res://translations/dialogue/dialogue.pt.translation", "res://translations/dialogue/dialogue.de.translation", "res://translations/dialogue/dialogue.ja.translation", "res://translations/dialogue/dialogue.fr.translation", "res://translations/dialogue/dialogue.ko.translation", "res://translations/dialogue/dialogue.pl.translation"]
+
+[params]
+
+compress=true
+delimiter=0

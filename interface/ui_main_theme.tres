@@ -1,0 +1,22 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://clyjuwxwpddet"]
+
+[ext_resource type="Texture2D" uid="uid://o1lkko8o4402" path="res://interface/textures/empty.png" id="1_gdla4"]
+
+[resource]
+Button/font_sizes/font_size = 24
+Label/font_sizes/font_size = 24
+LineEdit/font_sizes/font_size = 24
+OptionButton/font_sizes/font_size = 24
+PopupMenu/font_sizes/font_size = 24
+SpinBox/constants/buttons_vertical_separation = 0
+SpinBox/constants/buttons_width = 0
+SpinBox/constants/field_and_buttons_separation = 0
+SpinBox/icons/down = ExtResource("1_gdla4")
+SpinBox/icons/down_disabled = ExtResource("1_gdla4")
+SpinBox/icons/down_hover = ExtResource("1_gdla4")
+SpinBox/icons/down_pressed = ExtResource("1_gdla4")
+SpinBox/icons/up = ExtResource("1_gdla4")
+SpinBox/icons/up_disabled = ExtResource("1_gdla4")
+SpinBox/icons/up_hover = ExtResource("1_gdla4")
+SpinBox/icons/up_pressed = ExtResource("1_gdla4")
+SpinBox/icons/updown = ExtResource("1_gdla4")

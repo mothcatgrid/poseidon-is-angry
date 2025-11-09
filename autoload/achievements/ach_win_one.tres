@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="AchievementResource" load_steps=3 format=3 uid="uid://bwfpywjcbmlsi"]
+
+[ext_resource type="Script" path="res://autoload/achievements/achievement_resource.gd" id="1_8586h"]
+[ext_resource type="Texture2D" uid="uid://1uojxvmkq6f" path="res://icon.svg" id="1_f8r1v"]
+
+[resource]
+script = ExtResource("1_8586h")
+id = "win_one"
+stat = 0
+goal_value = 1
+stat_location = 0
+steam_api_name = "ACH_WIN_ONE_GAME"
+notify = true
+title = "Winner"
+description = "Win one game."
+achieved_icon = ExtResource("1_f8r1v")
+metadata/_custom_type_script = ExtResource("1_8586h")

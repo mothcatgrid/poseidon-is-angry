@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://5fvr2tq5jswr"]
+
+[ext_resource type="Script" uid="uid://cfv634q636n01" path="res://autoload/soundtrack/soundtrack.gd" id="1_57npi"]
+
+[node name="Soundtrack" type="Node"]
+process_mode = 3
+script = ExtResource("1_57npi")
+
+[node name="PrimaryTrackPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"Music"

@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://c1f75dwiuwwwt"
+
+[deps]
+
+files=["res://translations/interface/interface.en.translation", "res://translations/interface/interface.zh.translation", "res://translations/interface/interface.ru.translation", "res://translations/interface/interface.es.translation", "res://translations/interface/interface.pt.translation", "res://translations/interface/interface.de.translation", "res://translations/interface/interface.ja.translation", "res://translations/interface/interface.fr.translation", "res://translations/interface/interface.ko.translation", "res://translations/interface/interface.pl.translation"]
+
+source_file="res://translations/interface/interface.csv"
+dest_files=["res://translations/interface/interface.en.translation", "res://translations/interface/interface.zh.translation", "res://translations/interface/interface.ru.translation", "res://translations/interface/interface.es.translation", "res://translations/interface/interface.pt.translation", "res://translations/interface/interface.de.translation", "res://translations/interface/interface.ja.translation", "res://translations/interface/interface.fr.translation", "res://translations/interface/interface.ko.translation", "res://translations/interface/interface.pl.translation"]
+
+[params]
+
+compress=true
+delimiter=0

@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1yg4lgke2nhc"]
+
+[ext_resource type="Script" uid="uid://c8ljd5flto7cf" path="res://tools/csv_translator/csv_translator.gd" id="1_vcrcj"]
+
+[node name="CsvTranslator" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vcrcj")
+csv_file = "uid://c1f75dwiuwwwt"
+
+[node name="Status" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "CSV Translator"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]

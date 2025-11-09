@@ -1,0 +1,12 @@
+# Godot 4+ specific ignores
+.godot/
+*.tmp
+
+# Blender backup files
+*.blend1
+
+# Godotsteam generated
+addons/godotsteam/win64/~godotsteam.debug.x86_64.dll
+
+# Imported translations (automatically generated from CSV files)
+*.translation

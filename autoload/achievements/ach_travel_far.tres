@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="AchievementResource" load_steps=3 format=3 uid="uid://bjkssyuh602m0"]
+
+[ext_resource type="Texture2D" uid="uid://1uojxvmkq6f" path="res://icon.svg" id="1_orcw3"]
+[ext_resource type="Script" path="res://autoload/achievements/achievement_resource.gd" id="1_rmk8g"]
+
+[resource]
+script = ExtResource("1_rmk8g")
+id = "travel_100"
+stat = 1
+goal_value = 100
+stat_location = 0
+steam_api_name = "ACH_TRAVEL_FAR_SINGLE"
+notify = true
+title = "Travel Far"
+description = "Travel 100 miles."
+achieved_icon = ExtResource("1_orcw3")
+metadata/_custom_type_script = ExtResource("1_rmk8g")

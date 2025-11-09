@@ -1,0 +1,59 @@
+[gd_scene load_steps=4 format=3 uid="uid://rkkbh0g4lt78"]
+
+[ext_resource type="Theme" uid="uid://clyjuwxwpddet" path="res://interface/ui_main_theme.tres" id="1_fmenu"]
+[ext_resource type="Script" uid="uid://cywb5415vdvso" path="res://interface/options/option_types/option_slider.gd" id="1_u8mt3"]
+[ext_resource type="Script" path="res://interface/components/range_linker.gd" id="3_hbs6a"]
+
+[node name="OptionSlider" type="Button"]
+custom_minimum_size = Vector2(0, 48)
+offset_right = 256.0
+offset_bottom = 64.0
+theme = ExtResource("1_fmenu")
+script = ExtResource("1_u8mt3")
+option_identifier = "master_volume"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HBox" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="MarginContainer/HBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "afsda"
+vertical_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="MarginContainer/HBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+focus_mode = 0
+value = 1.0
+scrollable = false
+
+[node name="SpinBox" type="SpinBox" parent="MarginContainer/HBox"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 1
+alignment = 1
+select_all_on_focus = true
+
+[node name="RangeLinker" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_hbs6a")
+range_1_path = NodePath("../MarginContainer/HBox/HSlider")
+range_2_path = NodePath("../MarginContainer/HBox/SpinBox")
