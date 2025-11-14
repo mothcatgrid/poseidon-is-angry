@@ -21,6 +21,7 @@ uniform vec3 uv_offset;
 
 uniform float amplitude = 4.0;
 uniform float frequency = 0.1;
+uniform float speed = 0.5;
 
 uniform float time = 0.0;
 varying vec3 wave_pos;
@@ -28,25 +29,22 @@ varying vec3 wave_pos;
 void vertex() {
 	UV = UV * uv_scale.xy + uv_offset.xy;
 	// wave stuff
-	VERTEX.y = sin((VERTEX.x * frequency) + time) * amplitude;
-	NORMAL = normalize(vec3(1.0, cos((VERTEX.x * frequency) + time) * amplitude, 0.0));
+	float time_speed = time * speed;
+	VERTEX.y = (sin((VERTEX.x * frequency) + time_speed) + cos((VERTEX.x * frequency * 0.5) - time_speed)) * amplitude;
+	//VERTEX.y += cos(VERTEX.x * frequency * 0.1 + time_speed * 2.0) * amplitude * 3.0;
+	//VERTEX.x += cos(VERTEX.x * frequency - time_speed) * amplitude;
+	//VERTEX.x += cos((VERTEX.x * frequency * 0.3) - time_speed) * amplitude * 3.0;
+	//VERTEX.z += cos((VERTEX.z * frequency * 0.3) - time_speed) * amplitude * 3.0;
+
+	float y_prime = (cos((VERTEX.x * frequency) + time_speed) - sin((VERTEX.x * frequency * 0.5) - time_speed)) * amplitude;
+	NORMAL = normalize(vec3(-y_prime, 1.0, 0.0));
 	//VERTEX.x += cos((VERTEX.x * frequency) + time) * amplitude * 2.0;
 	wave_pos = VERTEX;
 }
 
 void fragment() {
 	vec2 base_uv = UV;
-
 	vec4 albedo_tex = texture(texture_albedo, base_uv);
-	ALBEDO = albedo.rgb * albedo_tex.rgb; //* ((wave_pos.y + amplitude) / amplitude );
-
-	float metallic_tex = dot(texture(texture_metallic, base_uv), metallic_texture_channel);
-	METALLIC = metallic_tex * metallic;
-	SPECULAR = specular;
-
-	vec4 roughness_texture_channel = vec4(1.0, 0.0, 0.0, 0.0);
-	float roughness_tex = dot(texture(texture_roughness, base_uv), roughness_texture_channel);
-	ROUGHNESS = roughness_tex * roughness;
-
-	//wave stuff
+	// float wave_factor = pow((wave_pos.y + amplitude) / amplitude, 3);
+	ALBEDO = albedo.rgb * albedo_tex.rgb;
 }

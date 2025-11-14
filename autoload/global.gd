@@ -52,7 +52,6 @@ var save_game: SaveGameFile = null
 # Only meant to be accessed by SaveGameFile - use init_save_game and then just read/write to save_game
 var _save_game_index: int = 0
 
-var player_boat = null
 var ocean_noise = preload("res://stage/ocean_noise.tres")
 
 func _ready():

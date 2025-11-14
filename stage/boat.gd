@@ -1,6 +1,6 @@
 extends RigidBody3D
 
-var input_force: float = 750.0
+var input_force: float = 1000.0
 var height: float = 4.0
 var floater_array: Array = []
 var floater_force: float = 0.0
@@ -9,7 +9,6 @@ var input_vector: Vector2 = Vector2.ZERO
 
 
 func _ready():
-	Global.player_boat = self
 	for child in %Floaters.get_children():
 		floater_array.append(child)
 		child.floater_height = height

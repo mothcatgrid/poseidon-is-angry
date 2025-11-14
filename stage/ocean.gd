@@ -13,6 +13,12 @@ extends Node3D
 		if get_node_or_null("Water"):
 			$Water.get_active_material(0).set_shader_parameter("frequency", value)
 
+@export var wave_speed: float = 0.2:
+	set(value):
+		wave_speed = value
+		if get_node_or_null("Water"):
+			$Water.get_active_material(0).set_shader_parameter("speed", value)
+
 var time: float = 0.0
 
 
@@ -27,5 +33,6 @@ func _process(delta: float) -> void:
 
 func get_ocean_height(point: Vector3) -> float:
 	var surface_position = Vector3(point.x, 0.0, point.z)
-	
-	return sin((point.x * wave_frequency) + time) * wave_amplitude
+	var time_speed = time * wave_speed
+	#return sin((point.x * wave_frequency) + time) * wave_amplitude
+	return (sin((point.x * wave_frequency) + time_speed) + cos((point.x * wave_frequency * 0.5) - time_speed)) * wave_amplitude;
