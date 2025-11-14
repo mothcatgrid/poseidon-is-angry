@@ -1,53 +1,40 @@
-[gd_scene load_steps=15 format=3 uid="uid://exrgufcpebjo"]
+[gd_scene load_steps=19 format=3 uid="uid://exrgufcpebjo"]
 
 [ext_resource type="Script" uid="uid://bpm7b4ppb88a5" path="res://stage/game_stage.gd" id="1_ngn01"]
 [ext_resource type="PackedScene" uid="uid://2ya8kahujt6x" path="res://interface/hud/hud.tscn" id="2_w873j"]
-
-[sub_resource type="Gradient" id="Gradient_ngn01"]
-colors = PackedColorArray(0.3413363, 0.7551287, 1, 1, 1, 1, 1, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_w873j"]
-noise_type = 2
-cellular_distance_function = 1
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vqmhq"]
-width = 1024
-height = 1024
-noise = SubResource("FastNoiseLite_w873j")
-color_ramp = SubResource("Gradient_ngn01")
-seamless = true
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_75ptj"]
-albedo_texture = SubResource("NoiseTexture2D_vqmhq")
-albedo_texture_force_srgb = true
-uv1_scale = Vector3(0.01, 0.01, 0.01)
-uv1_triplanar = true
+[ext_resource type="Script" uid="uid://c5ijc6utru81j" path="res://stage/game_camera.gd" id="3_jr68l"]
+[ext_resource type="Script" uid="uid://3p5ctsxdr1ty" path="res://stage/ocean.gd" id="3_s31gr"]
+[ext_resource type="Shader" uid="uid://6wm2wbd88uql" path="res://stage/new_waves.gdshader" id="4_v7cli"]
+[ext_resource type="Texture2D" uid="uid://cscjv64gvfiee" path="res://posicon.png" id="5_mtk5m"]
+[ext_resource type="PackedScene" uid="uid://7sdtw2pqfan0" path="res://stage/boat.tscn" id="6_1imul"]
+[ext_resource type="Script" uid="uid://0dgbvd2h0v7e" path="res://stage/buoy.gd" id="7_v7cli"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_mtk5m"]
 size = Vector2(1000, 1000)
-subdivide_width = 100
-subdivide_depth = 100
+subdivide_width = 500
+subdivide_depth = 500
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1imul"]
-albedo_color = Color(0.17981565, 0.40625, 0.18449236, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_v7cli"]
-radius = 64.0
-height = 12.0
-
-[sub_resource type="SphereMesh" id="SphereMesh_s31gr"]
-radius = 32.0
-height = 12.0
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_jr68l"]
-radius = 0.3
-height = 1.8
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s31gr"]
+render_priority = 0
+shader = ExtResource("4_v7cli")
+shader_parameter/albedo = Color(0.2842155, 0.52520144, 0.61328125, 1)
+shader_parameter/albedo_texture_size = Vector2i(0, 0)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/uv_scale = Vector3(0, 0, 0)
+shader_parameter/uv_offset = Vector3(0, 0, 0)
+shader_parameter/amplitude = 5.0
+shader_parameter/frequency = 0.1
+shader_parameter/time = 296.3905103333331
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hwnsv"]
-sky_top_color = Color(0.54145217, 0.8236853, 1, 1)
-sky_horizon_color = Color(1, 0.7639747, 0.6183852, 1)
+sky_top_color = Color(0.6743958, 0.8358063, 1, 1)
+sky_horizon_color = Color(1, 0.745618, 0.6702977, 1)
 sky_curve = 0.14489044
-ground_bottom_color = Color(0.21672451, 0.2673611, 0.2734375, 1)
+ground_bottom_color = Color(0.7857142, 0.9714286, 1, 1)
 ground_horizon_color = Color(1, 0.7647059, 0.61960787, 1)
 ground_curve = 0.09513663
 sun_angle_max = 57.05
@@ -60,40 +47,154 @@ radiance_size = 2
 [sub_resource type="Environment" id="Environment_xmjbq"]
 background_mode = 2
 sky = SubResource("Sky_cwrbe")
+fog_mode = 1
+fog_light_color = Color(0.71172005, 0.8106025, 0.86328125, 1)
+fog_density = 1.0
+fog_depth_begin = 50.0
+fog_depth_end = 200.0
+volumetric_fog_density = 0.015
+volumetric_fog_temporal_reprojection_enabled = false
+
+[sub_resource type="BoxMesh" id="BoxMesh_w873j"]
+size = Vector3(1, 2, 1)
+
+[sub_resource type="Shader" id="Shader_1imul"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.5.stable's StandardMaterial3D.
+
+shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_schlick_ggx;
+
+uniform vec4 albedo : source_color;
+uniform sampler2D texture_albedo : source_color, filter_linear_mipmap, repeat_enable;
+uniform ivec2 albedo_texture_size;
+uniform float point_size : hint_range(0.1, 128.0, 0.1);
+
+uniform float roughness : hint_range(0.0, 1.0);
+uniform sampler2D texture_metallic : hint_default_white, filter_linear_mipmap, repeat_enable;
+uniform vec4 metallic_texture_channel;
+uniform sampler2D texture_roughness : hint_roughness_r, filter_linear_mipmap, repeat_enable;
+
+uniform float specular : hint_range(0.0, 1.0, 0.01);
+uniform float metallic : hint_range(0.0, 1.0, 0.01);
+varying vec3 uv1_triplanar_pos;
+
+uniform float uv1_blend_sharpness : hint_range(0.0, 150.0, 0.001);
+varying vec3 uv1_power_normal;
+
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+uniform vec3 uv2_scale;
+uniform vec3 uv2_offset;
+
+void vertex() {
+	vec3 normal = MODEL_NORMAL_MATRIX * NORMAL;
+
+	TANGENT = vec3(0.0, 0.0, -1.0) * abs(normal.x);
+	TANGENT += vec3(1.0, 0.0, 0.0) * abs(normal.y);
+	TANGENT += vec3(1.0, 0.0, 0.0) * abs(normal.z);
+	TANGENT = inverse(MODEL_NORMAL_MATRIX) * normalize(TANGENT);
+
+	BINORMAL = vec3(0.0, 1.0, 0.0) * abs(normal.x);
+	BINORMAL += vec3(0.0, 0.0, -1.0) * abs(normal.y);
+	BINORMAL += vec3(0.0, 1.0, 0.0) * abs(normal.z);
+	BINORMAL = inverse(MODEL_NORMAL_MATRIX) * normalize(BINORMAL);
+
+	// UV1 Triplanar: Enabled (with World Triplanar)
+	uv1_power_normal = pow(abs(normal), vec3(uv1_blend_sharpness));
+	uv1_triplanar_pos = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz * uv1_scale + uv1_offset;
+	uv1_power_normal /= dot(uv1_power_normal, vec3(1.0));
+	uv1_triplanar_pos *= vec3(1.0, -1.0, 1.0);
+}
+
+vec4 triplanar_texture(sampler2D p_sampler, vec3 p_weights, vec3 p_triplanar_pos) {
+	vec4 samp = vec4(0.0);
+	samp += texture(p_sampler, p_triplanar_pos.xy) * p_weights.z;
+	samp += texture(p_sampler, p_triplanar_pos.xz) * p_weights.y;
+	samp += texture(p_sampler, p_triplanar_pos.zy * vec2(-1.0, 1.0)) * p_weights.x;
+	return samp;
+}
+
+void fragment() {
+	vec4 albedo_tex = triplanar_texture(texture_albedo, uv1_power_normal, uv1_triplanar_pos);
+	ALBEDO = albedo.rgb * albedo_tex.rgb;
+
+	float metallic_tex = dot(triplanar_texture(texture_metallic, uv1_power_normal, uv1_triplanar_pos), metallic_texture_channel);
+	METALLIC = metallic_tex * metallic;
+	SPECULAR = specular;
+
+	vec4 roughness_texture_channel = vec4(1.0, 0.0, 0.0, 0.0);
+	float roughness_tex = dot(triplanar_texture(texture_roughness, uv1_power_normal, uv1_triplanar_pos), roughness_texture_channel);
+	ROUGHNESS = roughness_tex * roughness;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v7cli"]
+render_priority = 0
+shader = SubResource("Shader_1imul")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("5_mtk5m")
+shader_parameter/albedo_texture_size = Vector2i(256, 256)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/uv1_blend_sharpness = 1.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+
+[sub_resource type="SphereMesh" id="SphereMesh_s31gr"]
+radius = 2.0
+height = 4.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jr68l"]
+albedo_color = Color(1, 0, 0.25873518, 1)
 
 [node name="GameStage" type="Node3D"]
 script = ExtResource("1_ngn01")
+metadata/_edit_lock_ = true
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.9941227, -0.10825966, 0, 0.10825966, 0.9941227, 3.8146973e-06, 9.462279, 67.93049)
+[node name="HUD" parent="." instance=ExtResource("2_w873j")]
+
+[node name="GameCamera" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 13.883)
+script = ExtResource("3_jr68l")
+
+[node name="Camera3D" type="Camera3D" parent="GameCamera"]
+transform = Transform3D(-1, -4.413722e-36, 8.742276e-08, 2.2626676e-08, 0.9659259, 0.25881907, -8.4443904e-08, 0.25881907, -0.9659258, 0, 23.554216, -51.609016)
 fov = 50.0
 
-[node name="Water" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.9986295, -0.05233596, 0, 0.05233596, 0.9986295, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_75ptj")
+[node name="Boat" parent="." instance=ExtResource("6_1imul")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 13.883)
+
+[node name="Ocean" type="Node3D" parent="."]
+script = ExtResource("3_s31gr")
+wave_amplitude = 5.0
+wave_frequency = 0.1
+
+[node name="Water" type="MeshInstance3D" parent="Ocean"]
+cast_shadow = 0
 mesh = SubResource("PlaneMesh_mtk5m")
-
-[node name="Land" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -68.09984, 0, 0)
-material_override = SubResource("StandardMaterial3D_1imul")
-mesh = SubResource("SphereMesh_v7cli")
-
-[node name="Land2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -68.09984, 4.5620327, 6.610365)
-material_override = SubResource("StandardMaterial3D_1imul")
-mesh = SubResource("SphereMesh_s31gr")
-
-[node name="Poseidon" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48.475, 20, 0)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Poseidon"]
-mesh = SubResource("CapsuleMesh_jr68l")
 skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_s31gr")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.70710677, 0.61237246, -0.35355335, 0, 0.49999997, 0.86602545, 0.70710677, -0.61237246, 0.35355335, 0, 42, -107)
+shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_xmjbq")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
-transform = Transform3D(-0.9732511, -0.020594675, 0.22881901, -7.836732e-09, 0.99597406, 0.08964183, -0.22974388, 0.08724401, -0.9693329, 0, 42, -107)
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 37, 0)
+mesh = SubResource("BoxMesh_w873j")
+skeleton = NodePath("../Boat2/Man")
+surface_material_override/0 = SubResource("ShaderMaterial_v7cli")
 
-[node name="HUD" parent="." instance=ExtResource("2_w873j")]
+[node name="Buoy" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.7259727, 0)
+mesh = SubResource("SphereMesh_s31gr")
+surface_material_override/0 = SubResource("StandardMaterial3D_jr68l")
+script = ExtResource("7_v7cli")

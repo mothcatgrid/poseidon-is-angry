@@ -2,21 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cscjv64gvfiee"
-path.s3tc="res://.godot/imported/posicon.png-f66af6eb2a78c12718dc49b19388534b.s3tc.ctex"
+uid="uid://rpmy27j0g26a"
+path="res://.godot/imported/vecteezy_pirate-clipart-design-illustration_9399229.png-94c88f029234a397c56989a3b032bd17.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://posicon.png"
-dest_files=["res://.godot/imported/posicon.png-f66af6eb2a78c12718dc49b19388534b.s3tc.ctex"]
+source_file="res://vecteezy_pirate-clipart-design-illustration_9399229.png"
+dest_files=["res://.godot/imported/vecteezy_pirate-clipart-design-illustration_9399229.png-94c88f029234a397c56989a3b032bd17.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -24,7 +23,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -38,4 +37,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

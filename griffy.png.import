@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cscjv64gvfiee"
-path.s3tc="res://.godot/imported/posicon.png-f66af6eb2a78c12718dc49b19388534b.s3tc.ctex"
+uid="uid://6wioagjkvub0"
+path.s3tc="res://.godot/imported/griffy.png-fdae6fc64367cc2188f9297c2dd5e244.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://posicon.png"
-dest_files=["res://.godot/imported/posicon.png-f66af6eb2a78c12718dc49b19388534b.s3tc.ctex"]
+source_file="res://griffy.png"
+dest_files=["res://.godot/imported/griffy.png-fdae6fc64367cc2188f9297c2dd5e244.s3tc.ctex"]
 
 [params]
 

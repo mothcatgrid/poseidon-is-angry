@@ -42,6 +42,7 @@ var block_player_input: bool = false
 # functions or signals instead of accessing these directly, otherwise check if_instance_valid
 var hud: HUD = null
 var fx: EffectsPool = null
+var ocean: Node3D = null
 # these should always be present, no need to check for null on access
 var game_settings: GameSettingsFile = null
 var system_settings: SystemSettingsFile = null
@@ -51,6 +52,8 @@ var save_game: SaveGameFile = null
 # Only meant to be accessed by SaveGameFile - use init_save_game and then just read/write to save_game
 var _save_game_index: int = 0
 
+var player_boat = null
+var ocean_noise = preload("res://stage/ocean_noise.tres")
 
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS

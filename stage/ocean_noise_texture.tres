@@ -1,0 +1,10 @@
+[gd_resource type="NoiseTexture2D" load_steps=2 format=3 uid="uid://d34sswml6vn2i"]
+
+[ext_resource type="FastNoiseLite" uid="uid://cmc2w4l2a6tbl" path="res://stage/ocean_noise.tres" id="1_cmlry"]
+
+[resource]
+width = 1000
+height = 1000
+generate_mipmaps = false
+noise = ExtResource("1_cmlry")
+seamless = true

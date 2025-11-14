@@ -1,0 +1,104 @@
+[gd_scene load_steps=11 format=3 uid="uid://7sdtw2pqfan0"]
+
+[ext_resource type="Script" uid="uid://bivq6agwq2vam" path="res://stage/boat.gd" id="1_sk0vn"]
+[ext_resource type="Texture2D" uid="uid://6wioagjkvub0" path="res://griffy.png" id="2_rex07"]
+[ext_resource type="PackedScene" uid="uid://bx82yq5vcsxiy" path="res://stage/float.tscn" id="2_sk0vn"]
+[ext_resource type="Material" uid="uid://b7l0iimd81yk1" path="res://boat/wood.tres" id="3_wgp74"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_wgp74"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1imul"]
+albedo_color = Color(0.1875, 0.1875, 0.1875, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_gg52u"]
+height = 20.0
+radial_segments = 32
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e1ile"]
+cull_mode = 2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_nwxmj"]
+material = SubResource("StandardMaterial3D_e1ile")
+size = Vector2(20, 10)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wgp74"]
+radius = 5.0
+height = 20.0
+
+[node name="Boat" type="RigidBody3D"]
+mass = 50.0
+center_of_mass_mode = 1
+angular_damp = 4.0
+script = ExtResource("1_sk0vn")
+
+[node name="Man" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0853305, -5.5434847)
+mesh = SubResource("CapsuleMesh_wgp74")
+surface_material_override/0 = SubResource("StandardMaterial3D_1imul")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.16568752, 0, 0, 0, 0.16568752, 0, 0, 0, 0.16568752, 2.96668, 3.4379838, -8.966468)
+pixel_size = 0.005
+texture = ExtResource("2_rex07")
+
+[node name="BoatHull" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="BoatHull"]
+size = Vector3(10, 20, 4)
+material = ExtResource("3_wgp74")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="BoatHull"]
+transform = Transform3D(0.70710665, -0.7071067, 0, 0.68301266, 0.6830126, 0.258819, -0.18301271, -0.1830127, 0.9659258, 0, 9.662447, 1.47549315e-08)
+size = Vector3(7, 7, 4)
+material = ExtResource("3_wgp74")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="BoatHull"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.546823e-08, 1.2689652)
+radius = 5.0
+height = 20.0
+material = ExtResource("3_wgp74")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="BoatHull"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6048489, -3.246776)
+operation = 2
+size = Vector3(8, 16, 6)
+material = ExtResource("3_wgp74")
+
+[node name="Mast" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+mesh = SubResource("CylinderMesh_gg52u")
+surface_material_override/0 = ExtResource("3_wgp74")
+
+[node name="TopMast" type="MeshInstance3D" parent="Mast"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 1.7484555e-07, 6, 0)
+mesh = SubResource("CylinderMesh_gg52u")
+surface_material_override/0 = ExtResource("3_wgp74")
+
+[node name="Sail" type="MeshInstance3D" parent="Mast"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.9660721, 0.6389451)
+mesh = SubResource("PlaneMesh_nwxmj")
+
+[node name="Floaters" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="Floater" parent="Floaters" instance=ExtResource("2_sk0vn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 14)
+
+[node name="Floater2" parent="Floaters" instance=ExtResource("2_sk0vn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -10)
+
+[node name="Floater3" parent="Floaters" instance=ExtResource("2_sk0vn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -10)
+
+[node name="Floater4" parent="Floaters" instance=ExtResource("2_sk0vn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5)
+
+[node name="Floater5" parent="Floaters" instance=ExtResource("2_sk0vn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_wgp74")
