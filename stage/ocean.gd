@@ -30,6 +30,30 @@ func _process(delta: float) -> void:
 	time += delta
 	$Water.get_active_material(0).set_shader_parameter("time", time)
 
+func gerstner_wave(wave: Vector4, p: Vector3, tangent: Vector3, binormal: Vector3, timemod: float):
+	var s: float = wave.z;
+	var w: float = wave.w;
+	var k: float = 2.0 * PI / w;
+	var c: float = sqrt(timemod / k);
+	var d: Vector2 = Vector2(wave.x, wave.y).normalized();
+	var f: float = k * (d.dot(Vector2(p.x, p.z)) - c * time);
+	var a: float = s / k;
+	
+	tangent += Vector3(
+		-d.x * d.x * (s * sin(f)),
+		d.x * (s * cos(f)),
+		-d.x * d.y * (s * sin(f))
+	);
+	binormal += Vector3(
+		-d.x * d.y * (s * sin(f)),
+		d.y * (s * cos(f)),
+		-d.y * d.y * (s * sin(f))
+	);
+	return Vector3(
+		d.x * (a * cos(f)),
+		a * sin(f),
+		d.y * (a * cos(f))
+	);
 
 func get_ocean_height(point: Vector3) -> float:
 	var surface_position = Vector3(point.x, 0.0, point.z)

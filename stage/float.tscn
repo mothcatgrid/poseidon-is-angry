@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bx82yq5vcsxiy"]
+[gd_scene load_steps=10 format=3 uid="uid://bx82yq5vcsxiy"]
 
 [ext_resource type="Script" uid="uid://2dvws2fgq74e" path="res://stage/float.gd" id="1_bsabs"]
 [ext_resource type="Texture2D" uid="uid://bjk364ltssb7a" path="res://common/textures/generic_particle.png" id="2_b8s7b"]
@@ -17,13 +17,6 @@ colors = PackedColorArray(1, 1, 1, 1, 0.30139878, 0.5182523, 0.640625, 0.5202864
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_85k2e"]
 gradient = SubResource("Gradient_b8s7b")
 
-[sub_resource type="Curve" id="Curve_b8s7b"]
-_data = [Vector2(0, 0.49063033), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_85k2e"]
-curve = SubResource("Curve_b8s7b")
-
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_85k2e"]
 emission_shape = 1
 emission_sphere_radius = 2.0
@@ -31,9 +24,7 @@ direction = Vector3(0, 1, 0)
 spread = 20.0
 initial_velocity_min = 6.0
 initial_velocity_max = 10.0
-scale_min = 2.0
-scale_max = 4.0
-scale_curve = SubResource("CurveTexture_85k2e")
+scale_min = 0.099999994
 color_ramp = SubResource("GradientTexture1D_85k2e")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y6hj5"]
@@ -62,8 +53,8 @@ surface_material_override/0 = SubResource("StandardMaterial3D_bsabs")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 cast_shadow = 0
+emitting = false
 amount = 64
-lifetime = 2.0
 process_material = SubResource("ParticleProcessMaterial_85k2e")
 draw_pass_1 = SubResource("QuadMesh_qvby2")
 

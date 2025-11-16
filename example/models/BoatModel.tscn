@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3us3jrbf4su4"]
+
+[ext_resource type="PackedScene" uid="uid://dgvhu1ltiay7h" path="res://models/boat.dae" id="1"]
+
+[node name="boat" instance=ExtResource("1")]

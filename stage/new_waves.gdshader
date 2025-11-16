@@ -1,50 +1,58 @@
-// NOTE: Shader automatically converted from Godot Engine 4.5.stable's StandardMaterial3D.
-
 shader_type spatial;
 render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_schlick_ggx, world_vertex_coords;
 
 uniform vec4 albedo : source_color;
-uniform sampler2D texture_albedo : source_color, filter_linear_mipmap, repeat_enable;
-uniform ivec2 albedo_texture_size;
-uniform float point_size : hint_range(0.1, 128.0, 0.1);
 
-uniform float roughness : hint_range(0.0, 1.0);
-uniform sampler2D texture_metallic : hint_default_white, filter_linear_mipmap, repeat_enable;
-uniform vec4 metallic_texture_channel;
-uniform sampler2D texture_roughness : hint_roughness_r, filter_linear_mipmap, repeat_enable;
-
-uniform float specular : hint_range(0.0, 1.0, 0.01);
-uniform float metallic : hint_range(0.0, 1.0, 0.01);
-
-uniform vec3 uv_scale;
-uniform vec3 uv_offset;
-
-uniform float amplitude = 4.0;
-uniform float frequency = 0.1;
-uniform float speed = 0.5;
-
+uniform float steepness: hint_range(0.0, 1.0) = 0.5;
+uniform float wavelength = 0.0;
+uniform vec2 direction;
 uniform float time = 0.0;
-varying vec3 wave_pos;
+uniform float gravity = 9.8;
+
+// dirx, diry, steepness, wavelength
+uniform vec4 wave_a;
+uniform vec4 wave_b;
+uniform vec4 wave_c;
+
+vec3 GerstnerWave(vec4 wave, vec3 p, inout vec3 tangent, inout vec3 binormal, float timemod) {
+    float s = wave.z;
+    float w = wave.w;
+    float k = 2.0 * PI / w;
+	float c = sqrt(timemod / k);
+	vec2 d = normalize(wave.xy);
+	float f = k * (dot(d, p.xz) - c * time);
+	float a = s / k;
+
+	tangent += vec3(
+		-d.x * d.x * (s * sin(f)),
+		d.x * (s * cos(f)),
+		-d.x * d.y * (s * sin(f))
+	);
+	binormal += vec3(
+		-d.x * d.y * (s * sin(f)),
+		d.y * (s * cos(f)),
+		-d.y * d.y * (s * sin(f))
+	);
+	return vec3(
+		d.x * (a * cos(f)),
+		a * sin(f),
+		d.y * (a * cos(f))
+	);
+}
 
 void vertex() {
-	UV = UV * uv_scale.xy + uv_offset.xy;
-	// wave stuff
-	float time_speed = time * speed;
-	VERTEX.y = (sin((VERTEX.x * frequency) + time_speed) + cos((VERTEX.x * frequency * 0.5) - time_speed)) * amplitude;
-	//VERTEX.y += cos(VERTEX.x * frequency * 0.1 + time_speed * 2.0) * amplitude * 3.0;
-	//VERTEX.x += cos(VERTEX.x * frequency - time_speed) * amplitude;
-	//VERTEX.x += cos((VERTEX.x * frequency * 0.3) - time_speed) * amplitude * 3.0;
-	//VERTEX.z += cos((VERTEX.z * frequency * 0.3) - time_speed) * amplitude * 3.0;
-
-	float y_prime = (cos((VERTEX.x * frequency) + time_speed) - sin((VERTEX.x * frequency * 0.5) - time_speed)) * amplitude;
-	NORMAL = normalize(vec3(-y_prime, 1.0, 0.0));
-	//VERTEX.x += cos((VERTEX.x * frequency) + time) * amplitude * 2.0;
-	wave_pos = VERTEX;
+	vec3 gridPoint = VERTEX.xyz;
+	vec3 tangent = vec3(1, 0, 0);
+	vec3 binormal = vec3(0, 0, 1);
+	vec3 p = gridPoint;
+	p += GerstnerWave(wave_a, gridPoint, tangent, binormal, gravity);
+	p += GerstnerWave(wave_b, gridPoint, tangent, binormal, gravity);
+	p += GerstnerWave(wave_c, gridPoint, tangent, binormal, gravity);
+	vec3 normal = normalize(cross(binormal, tangent));
+	VERTEX = p;
+	NORMAL = normal;
 }
 
 void fragment() {
-	vec2 base_uv = UV;
-	vec4 albedo_tex = texture(texture_albedo, base_uv);
-	// float wave_factor = pow((wave_pos.y + amplitude) / amplitude, 3);
-	ALBEDO = albedo.rgb * albedo_tex.rgb;
+	ALBEDO = albedo.rgb;
 }

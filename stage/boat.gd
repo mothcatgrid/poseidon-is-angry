@@ -1,7 +1,9 @@
 extends RigidBody3D
 
+@export var player_controlled: bool = false
+@export var height: float = 2.5
+
 var input_force: float = 1000.0
-var height: float = 4.0
 var floater_array: Array = []
 var floater_force: float = 0.0
 
@@ -17,18 +19,20 @@ func _ready():
 	var sum_vectors = Vector3.ZERO
 	for floater in floater_array:
 		sum_vectors += floater.position
-	center_of_mass = (sum_vectors / floater_array.size()) + Vector3(0.0, height * -0.5, 0.0)
-	floater_force = mass * mass
+	center_of_mass = (sum_vectors / floater_array.size()) + Vector3(0.0, height * -0.1, 0.0)
+	floater_force = mass * 9.8
 
 
 func _physics_process(delta: float) -> void:
 	linear_damp = clamp(linear_velocity.y * 0.5, 0.0, 4.0)
 	for floater in floater_array:
-		apply_force(Vector3.UP * pow(floater.submerge_prop, 3) * floater_force, floater.global_position - global_position)
+		apply_force(Vector3.UP * pow(floater.submerge_prop, 2) * floater_force, floater.global_position - global_position)
+		#apply_force(Vector3.UP * pow(floater.submerge_prop, 2) * floater_force, floater.global_position - global_position)
 	
 	apply_central_force(basis.z * input_vector.y * input_force)
 	apply_torque(Vector3.UP * sign(input_vector.x) * input_force * 3.0)
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	input_vector = Input.get_vector("move_right", "move_left", "move_down", "move_up")
+	if player_controlled:
+		input_vector = Input.get_vector("move_right", "move_left", "move_up", "move_down")

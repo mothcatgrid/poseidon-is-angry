@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://d1vgoe8awg3wg"]
+
+[ext_resource type="Script" uid="uid://3p5ctsxdr1ty" path="res://stage/ocean.gd" id="1_2eq7x"]
+[ext_resource type="Shader" uid="uid://6wm2wbd88uql" path="res://stage/new_waves.gdshader" id="2_y76bh"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_mtk5m"]
+size = Vector2(1000, 1000)
+subdivide_width = 500
+subdivide_depth = 500
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s31gr"]
+render_priority = 0
+shader = ExtResource("2_y76bh")
+shader_parameter/albedo = Color(0.26137933, 0.44029748, 0.67578125, 1)
+shader_parameter/steepness = 0.66000003135
+shader_parameter/wavelength = 20.15
+shader_parameter/direction = Vector2(0.24, -0.285)
+shader_parameter/time = 945.7184966666775
+shader_parameter/gravity = 9.8
+shader_parameter/wave_a = Vector4(1, 1, 0.1, 80)
+shader_parameter/wave_b = Vector4(-1, -1, 0.2, 40)
+shader_parameter/wave_c = Vector4(0.5, 0.5, 0.4, 20)
+
+[node name="Ocean" type="Node3D"]
+script = ExtResource("1_2eq7x")
+wave_speed = 1.0
+
+[node name="Water" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0007534027, 0, 0)
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_mtk5m")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_s31gr")
